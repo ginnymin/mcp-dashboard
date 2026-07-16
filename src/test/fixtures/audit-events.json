@@ -1,0 +1,35 @@
+{
+  "data": [
+    {
+      "id": "aud_test001",
+      "server_id": "srv_weather",
+      "deployment_id": "dep_weather_4",
+      "ts": "2026-06-16T08:00:00.000Z",
+      "event_type": "deployment.created",
+      "actor": "ci-bot",
+      "summary": "Deployment 2.0.0 created",
+      "metadata": { "version": "2.0.0" }
+    },
+    {
+      "id": "aud_test002",
+      "server_id": "srv_weather",
+      "deployment_id": null,
+      "ts": "2026-06-12T10:00:00.000Z",
+      "event_type": "api_key.rotated",
+      "actor": "alice@acme.com",
+      "summary": "API key key_live_c2d8 rotated",
+      "metadata": { "key_id": "key_live_c2d8" }
+    },
+    {
+      "id": "aud_test003",
+      "server_id": "srv_weather",
+      "deployment_id": null,
+      "ts": "2026-06-14T14:00:00.000Z",
+      "event_type": "rate_limit.changed",
+      "actor": "bob@acme.com",
+      "summary": "Rate limit changed from 60 to 120 rpm",
+      "metadata": { "old_rpm": 60, "new_rpm": 120 }
+    }
+  ],
+  "total": 3
+}

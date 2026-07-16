@@ -1,0 +1,28 @@
+{
+  "id": "dep_weather_4",
+  "server_id": "srv_weather",
+  "version": "2.0.0",
+  "status": "live",
+  "git_sha": "abc123def456",
+  "build_info": {
+    "trigger": "git_push",
+    "commit_message": "Internationalize forecast params"
+  },
+  "created_at": "2026-06-16T08:00:00.000Z",
+  "superseded_at": null,
+  "tools": [
+    {
+      "id": "tool_forecast",
+      "deployment_id": "dep_weather_4",
+      "name": "get_forecast",
+      "description": "Multi-day forecast",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "postal_code": { "type": "string" }
+        }
+      },
+      "is_new": false
+    }
+  ]
+}

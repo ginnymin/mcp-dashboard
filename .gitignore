@@ -1,0 +1,8 @@
+node_modules
+dist
+data/logs.db
+.env
+*.tsbuildinfo
+data/logs.db-shm
+data/logs.db-wal
+EVALUATION.md

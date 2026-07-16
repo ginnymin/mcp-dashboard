@@ -1,0 +1,1464 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MCP Observability Mockups</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #090a0c;
+        --panel: #101114;
+        --panel-2: #15171b;
+        --panel-3: #1b1d22;
+        --border: #292c33;
+        --border-soft: #202229;
+        --text: #f4f4f5;
+        --muted: #9b9ca3;
+        --faint: #64666f;
+        --green: #5dd39e;
+        --red: #ff6b6b;
+        --amber: #f0b45b;
+        --blue: #7aa8ff;
+        --violet: #a88bff;
+        --cyan: #64d2ff;
+        --shadow: 0 18px 80px rgba(0, 0, 0, 0.42);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background:
+          radial-gradient(
+            circle at 22% -12%,
+            rgba(90, 92, 105, 0.18),
+            transparent 34%
+          ),
+          linear-gradient(180deg, #0c0d10 0%, var(--bg) 34%, #07080a 100%);
+        color: var(--text);
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        letter-spacing: 0;
+      }
+
+      body {
+        padding: 28px;
+      }
+
+      .frame {
+        max-width: 1440px;
+        margin: 0 auto;
+        border: 1px solid #24262d;
+        border-radius: 8px;
+        overflow: hidden;
+        background: #0c0d10;
+        box-shadow: var(--shadow);
+      }
+
+      .app {
+        display: grid;
+        grid-template-columns: 236px 1fr;
+        min-height: 920px;
+      }
+
+      .sidebar {
+        border-right: 1px solid var(--border-soft);
+        background: #0b0c0f;
+        padding: 14px 12px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        height: 36px;
+        padding: 0 8px;
+        margin-bottom: 16px;
+        color: #ffffff;
+        font-weight: 650;
+      }
+
+      .mark {
+        width: 22px;
+        height: 22px;
+        border-radius: 6px;
+        background:
+          linear-gradient(
+            135deg,
+            rgba(93, 211, 158, 0.95),
+            rgba(100, 210, 255, 0.7)
+          ),
+          #15171b;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+      }
+
+      .nav-section {
+        margin: 18px 0;
+      }
+
+      .nav-title {
+        padding: 0 8px 8px;
+        color: var(--faint);
+        font-size: 11px;
+        font-weight: 650;
+        text-transform: uppercase;
+      }
+
+      .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        min-height: 32px;
+        padding: 0 8px;
+        border-radius: 6px;
+        color: #c8c9ce;
+        font-size: 13px;
+      }
+
+      .nav-item.active {
+        background: #181a1f;
+        color: #ffffff;
+      }
+
+      .nav-icon {
+        width: 14px;
+        height: 14px;
+        border: 1px solid #555861;
+        border-radius: 4px;
+      }
+
+      .nav-meta {
+        margin-left: auto;
+        color: var(--faint);
+        font-size: 12px;
+      }
+
+      .main {
+        min-width: 0;
+        background: linear-gradient(180deg, #101115 0%, #0d0e11 100%);
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        height: 58px;
+        padding: 0 18px;
+        border-bottom: 1px solid var(--border-soft);
+      }
+
+      .crumbs {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        color: var(--muted);
+        font-size: 13px;
+        white-space: nowrap;
+      }
+
+      .crumbs strong {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      .search {
+        margin-left: auto;
+        width: min(420px, 38vw);
+        height: 34px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        background: #0b0c0f;
+        color: var(--faint);
+        padding: 0 10px;
+        font-size: 13px;
+      }
+
+      .kbd {
+        margin-left: auto;
+        border: 1px solid #30323a;
+        border-radius: 4px;
+        color: #777a83;
+        padding: 1px 5px 2px;
+        font-size: 11px;
+      }
+
+      .toolbar-button {
+        min-width: 34px;
+        height: 34px;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        background: #111217;
+        color: #cfd0d4;
+        display: grid;
+        place-items: center;
+        font-size: 15px;
+      }
+
+      .content {
+        padding: 22px;
+      }
+
+      .mockup-label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 8px 0 14px;
+        color: #f7f7f8;
+        font-size: 13px;
+        font-weight: 650;
+      }
+
+      .mockup-label::before {
+        content: "";
+        width: 5px;
+        height: 18px;
+        border-radius: 8px;
+        background: var(--green);
+      }
+
+      .screen {
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: #0f1014;
+        overflow: hidden;
+        margin-bottom: 28px;
+      }
+
+      .screen-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-height: 54px;
+        padding: 0 16px;
+        border-bottom: 1px solid var(--border-soft);
+        background: #101115;
+      }
+
+      .title-stack {
+        min-width: 0;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        font-size: 18px;
+        line-height: 1.25;
+        font-weight: 680;
+      }
+
+      h2 {
+        font-size: 14px;
+        line-height: 1.3;
+        font-weight: 650;
+      }
+
+      h3 {
+        font-size: 12px;
+        line-height: 1.3;
+        color: #dfe0e4;
+        font-weight: 650;
+      }
+
+      .sub {
+        margin-top: 3px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .screen-actions {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .segmented {
+        display: flex;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 2px;
+        background: #0b0c0f;
+      }
+
+      .segment {
+        height: 27px;
+        padding: 0 10px;
+        border-radius: 5px;
+        display: grid;
+        place-items: center;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .segment.active {
+        background: #1d2026;
+        color: #ffffff;
+      }
+
+      .grid {
+        display: grid;
+        gap: 12px;
+      }
+
+      .overview-grid {
+        grid-template-columns: 1.18fr 0.82fr;
+        padding: 14px;
+      }
+
+      .kpis {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .card {
+        border: 1px solid var(--border-soft);
+        border-radius: 8px;
+        background: var(--panel);
+      }
+
+      .metric {
+        min-height: 112px;
+        padding: 13px;
+      }
+
+      .metric-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .metric-value {
+        margin-top: 18px;
+        font-size: 28px;
+        line-height: 1;
+        font-weight: 720;
+      }
+
+      .metric-note {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .trend.up {
+        color: var(--green);
+      }
+
+      .trend.down {
+        color: var(--red);
+      }
+
+      .spark {
+        display: flex;
+        align-items: end;
+        gap: 3px;
+        width: 58px;
+        height: 24px;
+      }
+
+      .spark i {
+        display: block;
+        flex: 1;
+        min-width: 3px;
+        border-radius: 2px 2px 0 0;
+        background: #383b43;
+      }
+
+      .spark.green i:nth-child(odd) {
+        background: rgba(93, 211, 158, 0.72);
+      }
+
+      .spark.red i:nth-child(3n) {
+        background: rgba(255, 107, 107, 0.76);
+      }
+
+      .wide-card {
+        padding: 14px;
+      }
+
+      .card-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 10px;
+      }
+
+      .tiny-action {
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .table th {
+        padding: 9px 8px;
+        color: var(--faint);
+        font-size: 11px;
+        font-weight: 650;
+        text-align: left;
+        border-bottom: 1px solid var(--border-soft);
+      }
+
+      .table td {
+        padding: 10px 8px;
+        border-bottom: 1px solid #191b20;
+        color: #dadbe0;
+        font-size: 12px;
+        vertical-align: middle;
+      }
+
+      .table tr:last-child td {
+        border-bottom: 0;
+      }
+
+      .mono {
+        font-family:
+          "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+        letter-spacing: 0;
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        white-space: nowrap;
+      }
+
+      .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 999px;
+        background: var(--muted);
+      }
+
+      .dot.green {
+        background: var(--green);
+      }
+
+      .dot.red {
+        background: var(--red);
+      }
+
+      .dot.amber {
+        background: var(--amber);
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        min-height: 21px;
+        padding: 0 7px;
+        border: 1px solid #30333b;
+        border-radius: 5px;
+        background: #15171c;
+        color: #cfd0d4;
+        font-size: 11px;
+        white-space: nowrap;
+      }
+
+      .tag.green {
+        border-color: rgba(93, 211, 158, 0.28);
+        color: #b8f0d7;
+      }
+
+      .tag.red {
+        border-color: rgba(255, 107, 107, 0.35);
+        color: #ffc7c7;
+      }
+
+      .tag.amber {
+        border-color: rgba(240, 180, 91, 0.33);
+        color: #ffddb0;
+      }
+
+      .tag.blue {
+        border-color: rgba(122, 168, 255, 0.32);
+        color: #c9dcff;
+      }
+
+      .side-stack {
+        display: grid;
+        grid-template-rows: auto auto;
+        gap: 12px;
+      }
+
+      .incident {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 10px;
+        min-height: 46px;
+        border-top: 1px solid #1b1d22;
+      }
+
+      .incident:first-of-type {
+        border-top: 0;
+      }
+
+      .incident-time {
+        color: var(--faint);
+        font-size: 11px;
+      }
+
+      .deployment-layout {
+        display: grid;
+        grid-template-columns: 0.78fr 1.22fr;
+        gap: 12px;
+        padding: 14px;
+      }
+
+      .server-card {
+        padding: 14px;
+      }
+
+      .server-identity {
+        display: grid;
+        grid-template-columns: 40px 1fr;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 14px;
+      }
+
+      .server-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #262a33, #15171b);
+        border: 1px solid #343741;
+        display: grid;
+        place-items: center;
+        color: var(--green);
+        font-weight: 760;
+      }
+
+      .field-list {
+        display: grid;
+        gap: 1px;
+        border: 1px solid var(--border-soft);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .field {
+        min-height: 38px;
+        display: grid;
+        grid-template-columns: 118px 1fr;
+        gap: 8px;
+        align-items: center;
+        background: #0d0e12;
+        padding: 0 10px;
+        font-size: 12px;
+      }
+
+      .field span:first-child {
+        color: var(--faint);
+      }
+
+      .mini-kpis {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: 12px;
+      }
+
+      .mini-kpi {
+        padding: 10px;
+        min-height: 74px;
+      }
+
+      .mini-kpi .metric-value {
+        margin-top: 12px;
+        font-size: 20px;
+      }
+
+      .tool-list {
+        display: grid;
+        gap: 8px;
+      }
+
+      .tool-row {
+        display: grid;
+        grid-template-columns: 1fr 72px 72px 76px 86px;
+        align-items: center;
+        gap: 10px;
+        min-height: 52px;
+        padding: 0 10px;
+        border: 1px solid var(--border-soft);
+        border-radius: 7px;
+        background: #0d0e12;
+        font-size: 12px;
+      }
+
+      .tool-name {
+        min-width: 0;
+      }
+
+      .tool-desc {
+        margin-top: 3px;
+        color: var(--faint);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .bar {
+        height: 6px;
+        border-radius: 999px;
+        background: #262932;
+        overflow: hidden;
+      }
+
+      .bar span {
+        display: block;
+        height: 100%;
+        border-radius: 999px;
+      }
+
+      .bar .green {
+        background: var(--green);
+      }
+
+      .bar .amber {
+        background: var(--amber);
+      }
+
+      .bar .red {
+        background: var(--red);
+      }
+
+      .trace-layout {
+        display: grid;
+        grid-template-columns: 0.88fr 1.12fr;
+        gap: 12px;
+        padding: 14px;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 8px;
+      }
+
+      .event {
+        display: grid;
+        grid-template-columns: 28px 1fr auto;
+        align-items: center;
+        gap: 10px;
+        min-height: 48px;
+        border: 1px solid var(--border-soft);
+        border-radius: 7px;
+        padding: 0 10px;
+        background: #0d0e12;
+      }
+
+      .event.selected {
+        border-color: rgba(122, 168, 255, 0.58);
+        background: #11151e;
+      }
+
+      .event-index {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: #1b1d23;
+        color: var(--muted);
+        font-size: 11px;
+      }
+
+      .event-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+      }
+
+      .event-sub {
+        margin-top: 3px;
+        color: var(--faint);
+        font-size: 11px;
+      }
+
+      .code-pane {
+        border: 1px solid var(--border-soft);
+        border-radius: 8px;
+        overflow: hidden;
+        background: #0b0c0f;
+      }
+
+      .code-tabs {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        min-height: 39px;
+        padding: 0 8px;
+        border-bottom: 1px solid var(--border-soft);
+        background: #101115;
+      }
+
+      .code-tab {
+        min-height: 26px;
+        padding: 0 9px;
+        border-radius: 5px;
+        display: grid;
+        place-items: center;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .code-tab.active {
+        color: #ffffff;
+        background: #1a1d23;
+      }
+
+      pre {
+        margin: 0;
+        padding: 14px 16px 18px;
+        color: #d7d8de;
+        font-size: 12px;
+        line-height: 1.58;
+        overflow: auto;
+      }
+
+      .json-key {
+        color: #8fc7ff;
+      }
+
+      .json-string {
+        color: #baf0d8;
+      }
+
+      .json-number {
+        color: #ffd39b;
+      }
+
+      .footer-notes {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        padding: 0 14px 14px;
+      }
+
+      .note {
+        min-height: 88px;
+        padding: 12px;
+      }
+
+      .note p {
+        margin-top: 7px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
+      @media (max-width: 1060px) {
+        body {
+          padding: 12px;
+        }
+
+        .app {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          display: none;
+        }
+
+        .overview-grid,
+        .deployment-layout,
+        .trace-layout,
+        .footer-notes {
+          grid-template-columns: 1fr;
+        }
+
+        .kpis,
+        .mini-kpis {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .tool-row {
+          grid-template-columns: 1fr 62px 62px;
+        }
+
+        .tool-row > :nth-child(4),
+        .tool-row > :nth-child(5) {
+          display: none;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .content {
+          padding: 12px;
+        }
+
+        .topbar {
+          padding: 0 12px;
+        }
+
+        .search {
+          display: none;
+        }
+
+        .screen-head {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 12px;
+        }
+
+        .screen-actions {
+          margin-left: 0;
+          width: 100%;
+          overflow-x: auto;
+        }
+
+        .kpis,
+        .mini-kpis {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="frame">
+      <div class="app">
+        <aside class="sidebar">
+          <div class="brand"><span class="mark"></span>Dashboard</div>
+
+          <div class="nav-section">
+            <div class="nav-title">Observe</div>
+            <div class="nav-item active">
+              <span class="nav-icon"></span>Servers
+              <span class="nav-meta">12</span>
+            </div>
+            <div class="nav-item">
+              <span class="nav-icon"></span>Deployments
+              <span class="nav-meta">38</span>
+            </div>
+            <div class="nav-item">
+              <span class="nav-icon"></span>Sessions
+              <span class="nav-meta">1.8k</span>
+            </div>
+            <div class="nav-item"><span class="nav-icon"></span>Logs</div>
+          </div>
+
+          <div class="nav-section">
+            <div class="nav-title">Pinned</div>
+            <div class="nav-item">
+              <span class="dot green"></span>docs-search
+            </div>
+            <div class="nav-item">
+              <span class="dot amber"></span>billing-tools
+            </div>
+            <div class="nav-item">
+              <span class="dot red"></span>repo-indexer
+            </div>
+          </div>
+
+          <div class="nav-section">
+            <div class="nav-title">Governance</div>
+            <div class="nav-item">
+              <span class="nav-icon"></span>Audit trail
+            </div>
+            <div class="nav-item"><span class="nav-icon"></span>Auth keys</div>
+            <div class="nav-item">
+              <span class="nav-icon"></span>Rate limits
+            </div>
+          </div>
+        </aside>
+
+        <main class="main">
+          <div class="topbar">
+            <div class="crumbs">
+              Workspace / <strong>Production MCP</strong>
+            </div>
+            <div class="search">
+              Search servers, tools, sessions, request ids
+              <span class="kbd">K</span>
+            </div>
+            <div class="toolbar-button">+</div>
+            <div class="toolbar-button">?</div>
+          </div>
+
+          <div class="content">
+            <div class="mockup-label">Mockup 01: Fleet overview</div>
+            <section class="screen">
+              <div class="screen-head">
+                <div class="title-stack">
+                  <h1>MCP servers</h1>
+                  <p class="sub">Last 24 hours across production deployments</p>
+                </div>
+                <div class="screen-actions">
+                  <div class="segmented">
+                    <div class="segment">1h</div>
+                    <div class="segment active">24h</div>
+                    <div class="segment">7d</div>
+                  </div>
+                  <div class="toolbar-button">f</div>
+                </div>
+              </div>
+
+              <div class="overview-grid grid">
+                <div class="grid">
+                  <div class="kpis grid">
+                    <div class="card metric">
+                      <div class="metric-top">
+                        Requests
+                        <span class="spark green"
+                          ><i style="height: 35%"></i><i style="height: 52%"></i
+                          ><i style="height: 46%"></i><i style="height: 78%"></i
+                          ><i style="height: 62%"></i><i style="height: 86%"></i
+                        ></span>
+                      </div>
+                      <div class="metric-value">94.2k</div>
+                      <div class="metric-note">
+                        <span class="trend up">+18%</span> from yesterday
+                      </div>
+                    </div>
+                    <div class="card metric">
+                      <div class="metric-top">
+                        Error rate
+                        <span class="spark red"
+                          ><i style="height: 22%"></i><i style="height: 30%"></i
+                          ><i style="height: 68%"></i><i style="height: 44%"></i
+                          ><i style="height: 76%"></i><i style="height: 58%"></i
+                        ></span>
+                      </div>
+                      <div class="metric-value">2.8%</div>
+                      <div class="metric-note">
+                        <span class="trend down">+1.1%</span> after v42
+                      </div>
+                    </div>
+                    <div class="card metric">
+                      <div class="metric-top">
+                        p95 latency
+                        <span class="spark green"
+                          ><i style="height: 38%"></i><i style="height: 42%"></i
+                          ><i style="height: 48%"></i><i style="height: 44%"></i
+                          ><i style="height: 51%"></i><i style="height: 49%"></i
+                        ></span>
+                      </div>
+                      <div class="metric-value">841ms</div>
+                      <div class="metric-note">
+                        <span class="trend up">-92ms</span> since deploy
+                      </div>
+                    </div>
+                    <div class="card metric">
+                      <div class="metric-top">
+                        Active sessions
+                        <span class="spark green"
+                          ><i style="height: 20%"></i><i style="height: 32%"></i
+                          ><i style="height: 34%"></i><i style="height: 48%"></i
+                          ><i style="height: 52%"></i><i style="height: 59%"></i
+                        ></span>
+                      </div>
+                      <div class="metric-value">317</div>
+                      <div class="metric-note">
+                        <span class="trend up">42</span> long running
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="card wide-card">
+                    <div class="card-head">
+                      <h2>Servers needing attention</h2>
+                      <span class="tiny-action">Sort by impact</span>
+                    </div>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Server</th>
+                          <th>Latest deployment</th>
+                          <th>Status</th>
+                          <th>Errors</th>
+                          <th>p95</th>
+                          <th>Top failing tool</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <strong>repo-indexer</strong><br /><span class="sub"
+                              >github / acme/search</span
+                            >
+                          </td>
+                          <td class="mono">v42-9f31c7</td>
+                          <td>
+                            <span class="status"
+                              ><span class="dot red"></span>Degraded</span
+                            >
+                          </td>
+                          <td><span class="tag red">8.9%</span></td>
+                          <td>1.92s</td>
+                          <td class="mono">search_code</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <strong>billing-tools</strong><br /><span
+                              class="sub"
+                              >gitlab / finance/mcp</span
+                            >
+                          </td>
+                          <td class="mono">v18-a1c902</td>
+                          <td>
+                            <span class="status"
+                              ><span class="dot amber"></span>Watch</span
+                            >
+                          </td>
+                          <td><span class="tag amber">3.7%</span></td>
+                          <td>1.21s</td>
+                          <td class="mono">invoice_lookup</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <strong>docs-search</strong><br /><span class="sub"
+                              >github / platform/docs</span
+                            >
+                          </td>
+                          <td class="mono">v71-c78e10</td>
+                          <td>
+                            <span class="status"
+                              ><span class="dot green"></span>Healthy</span
+                            >
+                          </td>
+                          <td><span class="tag green">0.4%</span></td>
+                          <td>412ms</td>
+                          <td class="mono">semantic_search</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <strong>crm-actions</strong><br /><span class="sub"
+                              >local upload</span
+                            >
+                          </td>
+                          <td class="mono">v09-bundle</td>
+                          <td>
+                            <span class="status"
+                              ><span class="dot green"></span>Healthy</span
+                            >
+                          </td>
+                          <td><span class="tag green">0.8%</span></td>
+                          <td>603ms</td>
+                          <td class="mono">update_contact</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="side-stack">
+                  <div class="card wide-card">
+                    <div class="card-head">
+                      <h2>Recent causal signals</h2>
+                      <span class="tiny-action">Live</span>
+                    </div>
+                    <div class="incident">
+                      <span class="dot red"></span>
+                      <div>
+                        <h3>repo-indexer v42 raised search_code timeouts</h3>
+                        <p class="sub">
+                          Errors concentrated in Cursor sessions
+                        </p>
+                      </div>
+                      <span class="incident-time">4m</span>
+                    </div>
+                    <div class="incident">
+                      <span class="dot amber"></span>
+                      <div>
+                        <h3>billing-tools rotated API key</h3>
+                        <p class="sub">
+                          Auth failures normalized after 11 requests
+                        </p>
+                      </div>
+                      <span class="incident-time">27m</span>
+                    </div>
+                    <div class="incident">
+                      <span class="dot green"></span>
+                      <div>
+                        <h3>docs-search p95 improved after v71</h3>
+                        <p class="sub">semantic_search returned below 500ms</p>
+                      </div>
+                      <span class="incident-time">1h</span>
+                    </div>
+                  </div>
+
+                  <div class="card wide-card">
+                    <div class="card-head">
+                      <h2>Governance coverage</h2>
+                      <span class="tiny-action">12 servers</span>
+                    </div>
+                    <table class="table">
+                      <tbody>
+                        <tr>
+                          <td>Authentication</td>
+                          <td><span class="tag green">10 enabled</span></td>
+                          <td><span class="tag red">2 open</span></td>
+                        </tr>
+                        <tr>
+                          <td>Audit logging</td>
+                          <td><span class="tag green">9 enabled</span></td>
+                          <td><span class="tag amber">3 quiet</span></td>
+                        </tr>
+                        <tr>
+                          <td>Rate limiting</td>
+                          <td><span class="tag green">8 enabled</span></td>
+                          <td><span class="tag amber">4 missing</span></td>
+                        </tr>
+                        <tr>
+                          <td>Policy changes</td>
+                          <td><span class="tag blue">17 events</span></td>
+                          <td>24h</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <div class="mockup-label">
+              Mockup 02: Server and deployment detail
+            </div>
+            <section class="screen">
+              <div class="screen-head">
+                <div class="title-stack">
+                  <h1>repo-indexer</h1>
+                  <p class="sub">
+                    GitHub source acme/search-mcp / production deployment
+                    v42-9f31c7
+                  </p>
+                </div>
+                <div class="screen-actions">
+                  <span class="tag red">Degraded</span>
+                  <span class="tag blue">Audit on</span>
+                  <span class="tag green">Auth on</span>
+                  <span class="tag amber">No rate limit</span>
+                </div>
+              </div>
+
+              <div class="deployment-layout">
+                <div class="grid">
+                  <div class="card server-card">
+                    <div class="server-identity">
+                      <div class="server-avatar">RI</div>
+                      <div>
+                        <h2>Current rollout</h2>
+                        <p class="sub mono">v42-9f31c7 deployed 38m ago</p>
+                      </div>
+                    </div>
+                    <div class="field-list">
+                      <div class="field">
+                        <span>Source</span
+                        ><strong>GitHub / acme/search-mcp</strong>
+                      </div>
+                      <div class="field">
+                        <span>Branch</span><span class="mono">main</span>
+                      </div>
+                      <div class="field">
+                        <span>Commit</span><span class="mono">9f31c7a</span>
+                      </div>
+                      <div class="field">
+                        <span>Build</span><span class="mono">build-2841</span>
+                      </div>
+                      <div class="field">
+                        <span>Clients</span
+                        ><span>Cursor, Claude Desktop, internal-agent</span>
+                      </div>
+                    </div>
+                    <div class="mini-kpis grid">
+                      <div class="card mini-kpi">
+                        <div class="metric-top">Requests</div>
+                        <div class="metric-value">21.4k</div>
+                      </div>
+                      <div class="card mini-kpi">
+                        <div class="metric-top">Errors</div>
+                        <div class="metric-value" style="color: var(--red)">
+                          8.9%
+                        </div>
+                      </div>
+                      <div class="card mini-kpi">
+                        <div class="metric-top">p95</div>
+                        <div class="metric-value">1.92s</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="card wide-card">
+                    <div class="card-head">
+                      <h2>Deployment history</h2>
+                      <span class="tiny-action">Compare with v41</span>
+                    </div>
+                    <table class="table">
+                      <tbody>
+                        <tr>
+                          <td class="mono">v42-9f31c7</td>
+                          <td><span class="tag red">current</span></td>
+                          <td>+6.1% errors</td>
+                          <td>+804ms p95</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">v41-e82bd4</td>
+                          <td><span class="tag green">stable</span></td>
+                          <td>2.8% errors</td>
+                          <td>1.12s p95</td>
+                        </tr>
+                        <tr>
+                          <td class="mono">v40-31aa20</td>
+                          <td><span class="tag green">stable</span></td>
+                          <td>1.9% errors</td>
+                          <td>980ms p95</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="card wide-card">
+                  <div class="card-head">
+                    <h2>Tool catalog health</h2>
+                    <span class="tiny-action"
+                      >5 tools exposed by this deployment</span
+                    >
+                  </div>
+                  <div class="tool-list">
+                    <div class="tool-row">
+                      <div class="tool-name">
+                        <strong class="mono">search_code</strong>
+                        <div class="tool-desc">
+                          Search indexed repositories using semantic and lexical
+                          filters
+                        </div>
+                      </div>
+                      <span><span class="tag red">12.4%</span></span>
+                      <span>2.84s</span>
+                      <div class="bar">
+                        <span class="red" style="width: 84%"></span>
+                      </div>
+                      <span class="tag amber">changed</span>
+                    </div>
+                    <div class="tool-row">
+                      <div class="tool-name">
+                        <strong class="mono">get_file</strong>
+                        <div class="tool-desc">
+                          Return file contents by repository, ref, and path
+                        </div>
+                      </div>
+                      <span><span class="tag green">0.7%</span></span>
+                      <span>388ms</span>
+                      <div class="bar">
+                        <span class="green" style="width: 24%"></span>
+                      </div>
+                      <span class="tag green">stable</span>
+                    </div>
+                    <div class="tool-row">
+                      <div class="tool-name">
+                        <strong class="mono">list_symbols</strong>
+                        <div class="tool-desc">
+                          Extract functions, classes, and exported members from
+                          a file
+                        </div>
+                      </div>
+                      <span><span class="tag amber">3.1%</span></span>
+                      <span>911ms</span>
+                      <div class="bar">
+                        <span class="amber" style="width: 52%"></span>
+                      </div>
+                      <span class="tag blue">new</span>
+                    </div>
+                    <div class="tool-row">
+                      <div class="tool-name">
+                        <strong class="mono">repo_summary</strong>
+                        <div class="tool-desc">
+                          Summarize repository language, ownership, and
+                          dependency signals
+                        </div>
+                      </div>
+                      <span><span class="tag green">0.2%</span></span>
+                      <span>460ms</span>
+                      <div class="bar">
+                        <span class="green" style="width: 30%"></span>
+                      </div>
+                      <span class="tag green">stable</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <div class="mockup-label">
+              Mockup 03: Session trace and payload inspection
+            </div>
+            <section class="screen">
+              <div class="screen-head">
+                <div class="title-stack">
+                  <h1>Session ses_8bc17f</h1>
+                  <p class="sub">
+                    Cursor / repo-indexer / v42-9f31c7 / started 14:22:03
+                  </p>
+                </div>
+                <div class="screen-actions">
+                  <span class="tag red">Failed</span>
+                  <span class="tag">11 requests</span>
+                  <span class="tag">3.8s duration</span>
+                </div>
+              </div>
+
+              <div class="trace-layout">
+                <div class="card wide-card">
+                  <div class="card-head">
+                    <h2>JSON-RPC timeline</h2>
+                    <span class="tiny-action">request ordered</span>
+                  </div>
+                  <div class="timeline">
+                    <div class="event">
+                      <div class="event-index">1</div>
+                      <div>
+                        <div class="event-title">
+                          <span class="dot green"></span
+                          ><span class="mono">initialize</span>
+                        </div>
+                        <div class="event-sub">clientInfo Cursor 0.49.2</div>
+                      </div>
+                      <span>42ms</span>
+                    </div>
+                    <div class="event">
+                      <div class="event-index">2</div>
+                      <div>
+                        <div class="event-title">
+                          <span class="dot green"></span
+                          ><span class="mono">tools/list</span>
+                        </div>
+                        <div class="event-sub">5 tools returned</div>
+                      </div>
+                      <span>81ms</span>
+                    </div>
+                    <div class="event">
+                      <div class="event-index">3</div>
+                      <div>
+                        <div class="event-title">
+                          <span class="dot green"></span
+                          ><span class="mono">tools/call get_file</span>
+                        </div>
+                        <div class="event-sub">src/index.ts</div>
+                      </div>
+                      <span>312ms</span>
+                    </div>
+                    <div class="event selected">
+                      <div class="event-index">4</div>
+                      <div>
+                        <div class="event-title">
+                          <span class="dot red"></span
+                          ><span class="mono">tools/call search_code</span>
+                        </div>
+                        <div class="event-sub">
+                          TimeoutError / index shard unavailable
+                        </div>
+                      </div>
+                      <span>5.00s</span>
+                    </div>
+                    <div class="event">
+                      <div class="event-index">5</div>
+                      <div>
+                        <div class="event-title">
+                          <span class="dot amber"></span
+                          ><span class="mono">tools/call search_code</span>
+                        </div>
+                        <div class="event-sub">
+                          retry returned partial results
+                        </div>
+                      </div>
+                      <span>2.19s</span>
+                    </div>
+                    <div class="event">
+                      <div class="event-index">6</div>
+                      <div>
+                        <div class="event-title">
+                          <span class="dot green"></span
+                          ><span class="mono">tools/call repo_summary</span>
+                        </div>
+                        <div class="event-sub">repository acme/search-mcp</div>
+                      </div>
+                      <span>441ms</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="code-pane">
+                  <div class="code-tabs">
+                    <div class="code-tab active">Request</div>
+                    <div class="code-tab">Error</div>
+                    <div class="code-tab">Response</div>
+                    <div class="code-tab">Metadata</div>
+                  </div>
+                  <pre class="mono">{
+  <span class="json-key">"jsonrpc"</span>: <span class="json-string">"2.0"</span>,
+  <span class="json-key">"id"</span>: <span class="json-number">4</span>,
+  <span class="json-key">"method"</span>: <span class="json-string">"tools/call"</span>,
+  <span class="json-key">"params"</span>: {
+    <span class="json-key">"name"</span>: <span class="json-string">"search_code"</span>,
+    <span class="json-key">"arguments"</span>: {
+      <span class="json-key">"query"</span>: <span class="json-string">"where is vector index initialized"</span>,
+      <span class="json-key">"repository"</span>: <span class="json-string">"acme/search-mcp"</span>,
+      <span class="json-key">"branch"</span>: <span class="json-string">"main"</span>,
+      <span class="json-key">"limit"</span>: <span class="json-number">10</span>
+    }
+  }
+}</pre>
+                </div>
+              </div>
+
+              <div class="footer-notes">
+                <div class="card note">
+                  <h3>Likely regression</h3>
+                  <p>
+                    Failure begins after v42, isolated to search_code, and
+                    appears only on Cursor sessions with semantic search
+                    enabled.
+                  </p>
+                </div>
+                <div class="card note">
+                  <h3>Next drilldown</h3>
+                  <p>
+                    Open all failed search_code calls from this deployment and
+                    compare request arguments against successful retries.
+                  </p>
+                </div>
+                <div class="card note">
+                  <h3>Governance context</h3>
+                  <p>
+                    No rate limit is configured for this server; 27 sessions
+                    repeated the same failing query within six minutes.
+                  </p>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

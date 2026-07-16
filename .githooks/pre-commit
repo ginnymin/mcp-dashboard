@@ -1,0 +1,10 @@
+#!/bin/sh
+# Auto-format staged files so diffs stay free of formatting noise.
+files=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '\.(ts|tsx|js|jsx|json|css|md)$')
+[ -z "$files" ] && exit 0
+printf '%s\n' "$files" | tr '\n' '\0' | xargs -0 npx prettier --write --ignore-unknown
+lint_files=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '\.(ts|tsx)$')
+if [ -n "$lint_files" ]; then
+  printf '%s\n' "$lint_files" | tr '\n' '\0' | xargs -0 npx eslint --fix
+fi
+printf '%s\n' "$files" | tr '\n' '\0' | xargs -0 git add

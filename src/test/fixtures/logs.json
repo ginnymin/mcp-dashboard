@@ -1,0 +1,44 @@
+{
+  "data": [
+    {
+      "id": "log_test003",
+      "session_id": "ses_test001",
+      "deployment_id": "dep_weather_4",
+      "server_id": "srv_weather",
+      "ts": "2026-06-17T10:15:00.000Z",
+      "method": "tools/call",
+      "tool_name": "get_forecast",
+      "status": "error",
+      "error_code": -32603,
+      "error_message": "Upstream timeout",
+      "latency_ms": 842
+    },
+    {
+      "id": "log_test002",
+      "session_id": "ses_test001",
+      "deployment_id": "dep_weather_4",
+      "server_id": "srv_weather",
+      "ts": "2026-06-17T09:00:01.000Z",
+      "method": "tools/list",
+      "tool_name": null,
+      "status": "ok",
+      "error_code": null,
+      "error_message": null,
+      "latency_ms": 18
+    },
+    {
+      "id": "log_test001",
+      "session_id": "ses_test001",
+      "deployment_id": "dep_weather_4",
+      "server_id": "srv_weather",
+      "ts": "2026-06-17T09:00:00.000Z",
+      "method": "initialize",
+      "tool_name": null,
+      "status": "ok",
+      "error_code": null,
+      "error_message": null,
+      "latency_ms": 42
+    }
+  ],
+  "total": 3
+}

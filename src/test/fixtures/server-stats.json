@@ -1,0 +1,26 @@
+{
+  "total_requests": 1500,
+  "error_rate": 1.25,
+  "session_count": 42,
+  "p50_latency_ms": 120,
+  "p95_latency_ms": 890,
+  "by_tool": [
+    {
+      "tool_name": "get_forecast",
+      "count": 800,
+      "error_count": 12,
+      "error_rate": 1.5,
+      "max_latency_ms": 1200
+    }
+  ],
+  "by_deployment": [
+    {
+      "deployment_id": "dep_weather_4",
+      "version": "2.0.0",
+      "count": 900,
+      "error_count": 10,
+      "error_rate": 1.11
+    }
+  ],
+  "error_codes": [{ "error_code": -32603, "count": 8 }]
+}
